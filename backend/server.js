@@ -9,7 +9,7 @@ const { Pool } = require('pg');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const JWT_SECRET = process.env.JWT_SECRET || 'your-fallback-secret-key';
+const JWT_SECRET = process.env.JWT_SECRET || 'replace-with-secure-secret';
 
 // Database connection
 const pool = new Pool({
@@ -17,7 +17,7 @@ const pool = new Pool({
   port: process.env.DB_PORT || 5432,
   database: process.env.DB_NAME || 'jobtracker',
   user: process.env.DB_USER || 'jobuser',
-  password: process.env.DB_PASSWORD || 'jobtracker123'
+  password: process.env.DB_PASSWORD || 'replace-with-secure-password'
 });
 
 // Middleware
