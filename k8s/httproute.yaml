@@ -1,0 +1,28 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: job-tracker
+  namespace: job-tracker
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  parentRefs:
+    - name: main-gateway
+      namespace: envoy-gateway-system
+  hostnames:
+    - job-track.catdevops.net
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /api
+      backendRefs:
+        - name: job-tracker-backend-service
+          port: 3001
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: job-tracker-frontend-service
+          port: 80
